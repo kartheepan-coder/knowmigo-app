@@ -34,7 +34,7 @@ export default function TabTwoScreen() {
                 <Avatar size="lg" className="rounded-full ">
                   <AvatarFallbackText>karthee</AvatarFallbackText>
                   <AvatarImage
-                    source={require("../../assets/images/Profile.png")}
+                    source={require("../../assets/images/profile.png")}
                   />
 
                   <AvatarBadge />

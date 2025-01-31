@@ -66,7 +66,7 @@ const StudentListItem = (name: { name: string }) => {
         <View className="flex flex-row justify-center items-center ml-3 my-3">
           <Avatar size="md" className="rounded-full">
             <AvatarFallbackText>{name.name}</AvatarFallbackText>
-            <AvatarImage source={require("../../assets/images/Profile.png")} />
+            <AvatarImage source={require("../../assets/images/profile.png")} />
             {/* <Image
               source={require("../../assets/images/Profile.png")}
               className="h-full w-full rounded-full absolute"
@@ -94,7 +94,7 @@ const StudentGroup = () => {
       <AvatarGroup>
         <Avatar size="lg">
           <AvatarFallbackText>John Doe</AvatarFallbackText>
-          <AvatarImage source={require("../../assets/images/Profile.png")} />
+          <AvatarImage source={require("../../assets/images/profile.png")} />
         </Avatar>
         <Avatar size="lg">
           <AvatarFallbackText>John Doe</AvatarFallbackText>
