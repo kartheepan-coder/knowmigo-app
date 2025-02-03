@@ -49,6 +49,7 @@ export default function TabOneScreen() {
   return (
     <SafeAreaProvider>
       <Editor setPlainText={setPlainText} setEditorState={setEditorState} />
+      <Text>{plainText}</Text>
     </SafeAreaProvider>
   );
 
