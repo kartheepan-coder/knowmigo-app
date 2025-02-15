@@ -1,7 +1,5 @@
 import { Pressable, StyleSheet, Image } from "react-native";
 
-import { Text, View } from "@/components/Themed";
-
 import { MessageCircle, MoreHorizontal } from "lucide-react-native";
 import {
   AvatarFallbackText,
@@ -10,6 +8,9 @@ import {
   Avatar,
   AvatarGroup,
 } from "@/components/ui/avatar";
+
+import { Text, View } from "@/components/Themed";
+
 import {
   GestureHandlerRootView,
   ScrollView,
