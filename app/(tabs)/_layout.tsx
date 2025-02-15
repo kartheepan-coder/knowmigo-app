@@ -6,7 +6,14 @@ import { Pressable } from "react-native";
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
 import { useClientOnlyValue } from "@/components/useClientOnlyValue";
-import { MessageCircle, User, UserPlus } from "lucide-react-native";
+import {
+  MessageCircle,
+  User,
+  UserPlus,
+  StickyNote,
+  Home,
+  FolderCode,
+} from "lucide-react-native";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -26,10 +33,16 @@ export default function TabLayout() {
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
-tabBarStyle: { display: "none" },
-
+        // tabBarStyle: {},
       }}
     >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Home",
+          tabBarIcon: ({ color }) => <Home color={color} />,
+        }}
+      />
       <Tabs.Screen
         name="students"
         options={{
@@ -37,29 +50,25 @@ tabBarStyle: { display: "none" },
           tabBarIcon: ({ color }) => <User color={color} />,
           headerShown: false,
           headerRight: () => (
-            // <Link href="/modal" asChild>
-            //   <Pressable>
-            //     {({ pressed }) => (
-            //       <FontAwesome
-            //         name="info-circle"
-            //         size={25}
-            //         color={Colors[colorScheme ?? "light"].text}
-            //         style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-            //       />
-            //     )}
-            //   </Pressable>
-            // </Link>
             <UserPlus color={"black"} style={{ margin: 10 }} />
           ),
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="test"
         options={{
-          title: "Post",
-          tabBarIcon: ({ color }) => <MessageCircle color={color} />,
+          title: "Test",
+          headerShown: false,
+          tabBarIcon: ({ color }) => <FolderCode color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="hello"
+        options={{
+          title: "Hello",
+          tabBarIcon: ({ color }) => <StickyNote color={color} />,
+        }}
+      />{" "}
     </Tabs>
   );
 }
