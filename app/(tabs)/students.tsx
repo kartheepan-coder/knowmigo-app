@@ -1,8 +1,4 @@
 import {
-  MarkdownTextInput,
-  parseExpensiMark,
-} from "@expensify/react-native-live-markdown";
-import {
   View,
   Text,
   StyleSheet,
@@ -11,7 +7,13 @@ import {
   ScrollView,
 } from "react-native";
 
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import BottomSheet, {
   BottomSheetModal,
@@ -26,6 +28,10 @@ import { Link, router } from "expo-router";
 import { Button, ButtonText } from "@/components/ui/button";
 import DOMComponent from "./hello";
 import Editor from "@/components/lexical/hello-dom";
+import { ChatComp } from "@/components/custom/chatComponent";
+import { Example } from "@/components/custom/newChat";
+import { HStack } from "@/components/ui/hstack";
+import { VStack } from "@/components/ui/vstack";
 
 // import { Imageu as Reactcomp } from "";
 
@@ -45,11 +51,40 @@ export default function TabOneScreen() {
     console.log("handleSheetChanges", index);
   }, []);
 
+  useEffect(() => {
+    console.log("hiii");
+  }, []);
   const [text, setText] = React.useState("Hello, *world*!");
   return (
     <SafeAreaProvider>
-      <Editor setPlainText={setPlainText} setEditorState={setEditorState} />
-      <Text>{plainText}</Text>
+      {/* <Editor setPlainText={setPlainText} setEditorState={setEditorState} />
+      <Text>{text}</Text> */}
+
+      {/* <ChatComp /> */}
+      <View
+        className="w-screen h-screen flex justify-center items-center"
+        style={[{ backgroundColor: "transparent" }]}
+      >
+        // Update the View component to use the style from StyleSheet
+        <View
+          className="w-auto h-auto p-4 rounded-md "
+          style={[{ backgroundColor: "white" }, styles.cardShadow]}
+        >
+          <HStack className="rounded-lg">
+            <Image
+              source={require("../../assets/images/rathu.png")}
+              height={20}
+              width={20}
+              style={{ height: 42, width: 42, borderRadius: 8 }}
+              className=" mt-[16px] ml-[16px] mr-[12px]"
+            ></Image>
+            <VStack>
+              <Text>Karthee</Text>
+              <Text>Added updates to Botany 🌱</Text>
+            </VStack>
+          </HStack>
+        </View>
+      </View>
     </SafeAreaProvider>
   );
 
@@ -138,5 +173,15 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     alignItems: "center",
+  },
+  cardShadow: {
+    shadowColor: "#363535",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.16,
+    shadowRadius: 13,
+    elevation: 5,
   },
 });
