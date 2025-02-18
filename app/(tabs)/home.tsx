@@ -5,7 +5,7 @@ import { ScrollView, Text, View } from "react-native";
 import { AppBar, KnowmigoFollow, KnowmigoPost } from "./test";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, ButtonText } from "@/components/ui/button";
-import { auth } from "@/firebaseConfig";
+import { auth } from "@/constants/firebaseConfig";
 import { Redirect, router, usePathname } from "expo-router";
 import { updateCurrentUser, updateProfile, User } from "firebase/auth";
 

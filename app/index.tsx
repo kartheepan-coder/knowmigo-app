@@ -1,5 +1,5 @@
 import { Input, InputField } from "@/components/ui/input";
-import { auth } from "@/firebaseConfig";
+import { auth } from "@/constants/firebaseConfig";
 import { Button } from "@rneui/base";
 import { Redirect, router, usePathname } from "expo-router";
 import {

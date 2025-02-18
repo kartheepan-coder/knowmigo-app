@@ -24,7 +24,7 @@ import {
 import { useEffect, useState } from "react";
 import { HStack } from "@/components/ui/hstack";
 import { VStack } from "@/components/ui/vstack";
-import { app, auth, bucket } from "@/firebaseConfig";
+import { app, auth, bucket } from "@/constants/firebaseConfig";
 import { updateProfile, User } from "firebase/auth";
 
 export default function TabTwoScreen() {
