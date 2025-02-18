@@ -28,8 +28,7 @@ import { Link, router } from "expo-router";
 import { Button, ButtonText } from "@/components/ui/button";
 import DOMComponent from "./hello";
 import Editor from "@/components/lexical/hello-dom";
-import { ChatComp } from "@/components/custom/chatComponent";
-import { Example } from "@/components/custom/newChat";
+
 import { HStack } from "@/components/ui/hstack";
 import { VStack } from "@/components/ui/vstack";
 
