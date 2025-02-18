@@ -1,4 +1,10 @@
 import { Pressable, StyleSheet, Image } from "react-native";
+import {
+  getDownloadURL,
+  getStorage,
+  listAll,
+  ref as storageRef,
+} from "firebase/storage";
 
 import { MessageCircle, MoreHorizontal } from "lucide-react-native";
 import {
@@ -15,11 +21,16 @@ import {
   GestureHandlerRootView,
   ScrollView,
 } from "react-native-gesture-handler";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HStack } from "@/components/ui/hstack";
 import { VStack } from "@/components/ui/vstack";
+import { app, auth, bucket } from "@/constants/firebaseConfig";
+import { updateProfile, User } from "firebase/auth";
 
 export default function TabTwoScreen() {
+  useEffect(() => {
+    console.log(auth);
+  }, []);
   return (
     // <View className="w-screen h-full rounded-lg flex justify-center items-center">
 
@@ -63,6 +74,21 @@ export default function TabTwoScreen() {
 }
 
 const AppBar = () => {
+  const [userDp, setuserDp] = useState("");
+
+  useEffect(() => {
+    const getUserDp = async () => {
+      const storage = getStorage(app);
+      const imageRef = storageRef(
+        storage,
+        auth.currentUser?.photoURL as string
+      );
+      console.log(await getDownloadURL(imageRef));
+      setuserDp(await getDownloadURL(imageRef));
+    };
+    getUserDp();
+  }, []);
+
   return (
     <View className="w-full h-auto flex flex-row justify-between items-center px-5">
       <Image
@@ -71,12 +97,62 @@ const AppBar = () => {
         height={42}
         className="h-[42px] w-[42px]"
       ></Image>
-      <Avatar size="md" className="rounded-full my-[10px]">
-        <AvatarFallbackText>Kartheepan</AvatarFallbackText>
-        <AvatarImage source={require("../../assets/images/kartheepan.png")} />
+      <Pressable
+        onPress={async () => {
+          // console.log(auth.currentUser?.photoURL);
+          // await updateProfile(auth.currentUser as User, {
+          //   displayName: "vyshika",
+          //   photoURL:
+          //     "gs://knowmigo-699e8.firebasestorage.app/images/rathushan.png",
+          // });
+          console.log("hiii");
+          try {
+            const storage = getStorage();
+            console.log(auth.currentUser?.photoURL);
 
-        {/* <AvatarBadge /> */}
-      </Avatar>
+            const imageRef = storageRef(
+              storage,
+              auth.currentUser?.photoURL as string
+            );
+            console.log(imageRef);
+
+            console.log(await getDownloadURL(imageRef));
+
+            // Create a reference under which you want to list
+            // const listRef = storageRef(storage, "images/rathushan.png");
+
+            // console.log(await getDownloadURL(listRef));
+
+            // // Find all the prefixes and items.
+            // listAll(listRef)
+            //   .then((res) => {
+            //     res.prefixes.forEach((folderRef) => {
+            //       console.log(folderRef);
+            //       // All the prefixes under listRef.
+            //       // You may call listAll() recursively on them.
+            //     });
+            //     res.items.forEach((itemRef) => {
+            //       console.log(itemRef);
+            //       // All the items under listRef.
+            //     });
+            //   })
+            //   .catch((error) => {
+            //     // Uh-oh, an error occurred!
+            //     console.error(error);
+            //   });
+          } catch (error) {
+            console.error(error);
+          }
+          // console.log(await getDownloadURL(storeageRef));
+        }}
+      >
+        <Avatar size="md" className="rounded-full my-[10px]">
+          <AvatarFallbackText>Kartheepan</AvatarFallbackText>
+          <AvatarImage source={{ uri: userDp }} />
+
+          {/* <AvatarBadge /> */}
+        </Avatar>
+      </Pressable>
     </View>
   );
 };
@@ -208,7 +284,14 @@ const KnowmigoFollow = ({
           {description ? description : "17, Biology 🫀"}
         </Text>
       </View>
-      <Pressable className="mb-[10px]">
+      <Pressable
+        className="mb-[10px]"
+        disabled={false}
+        onPress={() => {
+          auth.signOut();
+          console.log("clicked");
+        }}
+      >
         <View
           className="w-auto h-auto rounded-full"
           style={{ backgroundColor: "black" }}
@@ -337,3 +420,5 @@ const styles = StyleSheet.create({
     shadowColor: "#2E77F8",
   },
 });
+
+export { AppBar, KnowmigoFollow, KnowmigoPost };
