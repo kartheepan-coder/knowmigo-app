@@ -1,6 +1,6 @@
 import { HStack } from "@/components/ui/hstack";
 import { VStack } from "@/components/ui/vstack";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import { AppBar, KnowmigoFollow, KnowmigoPost } from "./test";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -8,12 +8,13 @@ import { Button, ButtonText } from "@/components/ui/button";
 import { auth } from "@/constants/firebaseConfig";
 import { Redirect, router, usePathname } from "expo-router";
 import { updateCurrentUser, updateProfile, User } from "firebase/auth";
+import { MarkdownTextInput } from "@expensify/react-native-live-markdown";
+import markdownStyle from "@/components/markdownEditor/editor";
+import Editor from "@/components/lexical/hello-dom";
 
 function Home() {
   const path = usePathname();
-  useEffect(() => {
-    console.log(path);
-  }, []);
+
   // if (!auth.currentUser) {
   //   return <Redirect href={"/"} />;
   // }
@@ -22,6 +23,8 @@ function Home() {
       router.replace("/");
     }
   });
+
+  const [text, setText] = useState("");
   return (
     <SafeAreaView>
       <ScrollView
@@ -29,6 +32,13 @@ function Home() {
         showsVerticalScrollIndicator={false}
       >
         <AppBar />
+        {/* <MarkdownTextInput
+          value={text}
+          onChangeText={setText}
+          markdownStyle={markdownStyle}
+          multiline={true}
+        /> */}
+
         {/* <Button
           onPress={async () => {
             // auth.signOut();
